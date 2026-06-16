@@ -17,7 +17,7 @@
 
 [繁體中文說明](./README.zh-TW.md)
 
-![All six coralline themes rendered side by side](./assets/hero.png)
+![coralline theme picker — browsing and applying themes live](./assets/theme-picker-demo.gif)
 
 ## ✨ What this fork adds: 72 themes + an interactive picker
 
@@ -37,18 +37,7 @@ picker** so you can browse them all and apply your favorite without editing a si
 bash tools/theme-picker.sh
 ```
 
-```text
-  coralline theme picker  —  12/79 themes
-  ↑/↓ j/k move · u/d page · enter apply · q quit
-
-  preview:
-  ╭ ~/proj  ⎇ main  ◆ Opus 4.8  ⬡ ▰▰▰▱▱ 62%  5h ▰▰▱▱▱ 41%  $1.23  ⊙ 02:45 pm ╮
-
-  ▸ one-dark-pro
-    night-owl
-    laserwave
-    shades-of-purple
-```
+![the theme picker showing a live statusline preview as you browse](./assets/theme-picker-demo.png)
 
 - **Live preview** — the highlighted theme renders as a *real* statusline using your own
   `statusline.sh` and your current segment/layout settings.
@@ -62,9 +51,18 @@ bash tools/theme-picker.sh
 > No-Italic variants are color-identical in a statusline. A handful of themes with no
 > published hex are reconstructed from their source theme and tagged `# approximated`.
 
-See the [Themes](#themes) section for the original built-in themes, or just run the picker.
+### Quick start
 
-## Install (the fun way)
+```bash
+git clone https://github.com/kylinfish/coralline-best-themes ~/.claude/coralline-src
+bash ~/.claude/coralline-src/tools/theme-picker.sh   # browse all 79 themes, enter to apply
+```
+
+_That's the themes + picker. Wiring it into Claude Code's statusline (and everything inherited
+from upstream coralline) is in the collapsed sections below._
+
+<details>
+<summary><b>📦 Install via AI (the fun way)</b> — inherited from upstream coralline</summary>
 
 Paste this into Claude Code:
 
@@ -78,7 +76,10 @@ Claude will ask you to pick a theme (with previews), choose which segments you w
 between a one-line or two-line layout, then wire everything up and verify it. No manual
 config editing required.
 
-## What you get
+</details>
+
+<details>
+<summary><b>🧩 Segments reference</b> — what each part of the line shows (inherited from upstream)</summary>
 
 ```text
 ╭ ~/side-project/coralline  ⎇ main+!  ◆ Fable 5  ⬡ ▰▰▰▱▱ 62% ↑1.2M ↓45.6k  5h ▰▰▱▱▱ 41% ↺2h44m  $1.23  ⊙ 02:45 pm ╮
@@ -101,6 +102,8 @@ config editing required.
 
 Gauges change color as they fill: green → yellow at 50% → red at 75% (thresholds configurable).
 
+</details>
+
 <details>
 <summary><b>🚀 Why it's fast</b> — inherited from upstream coralline</summary>
 
@@ -114,7 +117,8 @@ spam. Works on stock macOS bash 3.2 and any Linux bash.
 
 </details>
 
-## Manual install
+<details>
+<summary><b>🛠️ Manual install</b> — copy the files yourself + wire into settings.json</summary>
 
 ```bash
 git clone https://github.com/kylinfish/coralline-best-themes ~/.claude/coralline-src
@@ -145,6 +149,8 @@ Then add to `~/.claude/settings.json`:
 
 > **Note:** requires `jq` and a [Nerd Font](https://www.nerdfonts.com/) terminal.
 > No Nerd Font? Set `VL_ASCII=1` in your config for a glyph-free rendering.
+
+</details>
 
 <details>
 <summary><b>🖥️ Platform support</b> — macOS / Linux / Windows (inherited from upstream)</summary>
@@ -227,27 +233,23 @@ Prefer Powerlevel10k's *lean* look — no backgrounds, just colored text? Set
 
 </details>
 
-## Themes
+<details>
+<summary><b>🎨 Original built-in themes & writing your own</b> — the 7 upstream themes (inherited)</summary>
 
-| | |
-|---|---|
-| **`claude-coral`** — steel blue · mauve · Claude coral (default)<br>![claude-coral theme preview](./assets/theme-claude-coral.png) | **`catppuccin-mocha`** — soft pastels on dark<br>![catppuccin-mocha theme preview](./assets/theme-catppuccin-mocha.png) |
-| **`nord`** — arctic frost<br>![nord theme preview](./assets/theme-nord.png) | **`gruvbox-dark`** — warm retro<br>![gruvbox-dark theme preview](./assets/theme-gruvbox-dark.png) |
-| **`tokyo-night`** — neon on deep navy<br>![tokyo-night theme preview](./assets/theme-tokyo-night.png) | **`mono`** — grayscale minimalism<br>![mono theme preview](./assets/theme-mono.png) |
-| **`dracula`** — cyan · pink · purple on charcoal<br>![dracula theme preview](./assets/theme-dracula.png) | |
+> Looking for the 72-theme pack? It's up top under
+> [**✨ What this fork adds**](#-what-this-fork-adds-72-themes--an-interactive-picker) — just run
+> `bash tools/theme-picker.sh`.
+
+Upstream ships 7 hand-tuned themes: `claude-coral` (default), `catppuccin-mocha`, `nord`,
+`gruvbox-dark`, `tokyo-night`, `mono`, `dracula`.
 
 A theme is just a `.conf` file assigning `VL_BG_*` / `VL_FG_*` — copy one, change the colors,
 and source yours from `coralline.conf` instead. PRs with new themes are welcome.
 
-**Plus the 72 ported themes in [`themes/best-themes/`](./themes/best-themes)** — browse and apply
-them all with the [interactive picker](#-what-this-fork-adds-72-themes--an-interactive-picker):
-`bash tools/theme-picker.sh`.
+</details>
 
-> **Tip:** the preview images are generated from the real script by
-> [`tools/render-screenshots.py`](./tools/render-screenshots.py) — after adding a theme, add it
-> to the `THEMES` list there and re-run it to get a matching preview.
-
-## Acknowledgements
+<details>
+<summary><b>🙏 Acknowledgements</b> — Powerlevel10k & the powerline lineage (inherited)</summary>
 
 The visual language of coralline — segmented pills, powerline transitions, the `⇡⇣` git
 glyphs, gauges that shift color as they fill — is a loving tribute to
@@ -259,6 +261,8 @@ the pill shapes possible.
 
 As for the name: coralline algae build reefs one thin, colorful layer at a time —
 and **coral·line** is exactly what this is: a line, in Claude's coral.
+
+</details>
 
 ## Credits
 
