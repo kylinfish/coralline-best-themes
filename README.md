@@ -101,7 +101,8 @@ config editing required.
 
 Gauges change color as they fill: green → yellow at 50% → red at 75% (thresholds configurable).
 
-## Why it's fast
+<details>
+<summary><b>🚀 Why it's fast</b> — inherited from upstream coralline</summary>
 
 The statusline is just a local shell script: it makes no network or API calls and uses zero
 tokens. Claude Code pipes the session JSON to it on stdin and renders whatever it prints.
@@ -110,6 +111,8 @@ It runs every second (`refreshInterval: 1`), so the script is built to be cheap 
 `jq` invocation extracts every field at once, and one `git status --porcelain=v2 --branch`
 call provides branch, dirty state, and ahead/behind together. No `bc`, no per-field subprocess
 spam. Works on stock macOS bash 3.2 and any Linux bash.
+
+</details>
 
 ## Manual install
 
@@ -143,7 +146,8 @@ Then add to `~/.claude/settings.json`:
 > **Note:** requires `jq` and a [Nerd Font](https://www.nerdfonts.com/) terminal.
 > No Nerd Font? Set `VL_ASCII=1` in your config for a glyph-free rendering.
 
-### Platform support
+<details>
+<summary><b>🖥️ Platform support</b> — macOS / Linux / Windows (inherited from upstream)</summary>
 
 | Platform | Status |
 |---|---|
@@ -157,7 +161,10 @@ Then add to `~/.claude/settings.json`:
 > case is on the roadmap. The render path is built to stay cheap under Git Bash's emulated
 > `fork()` — one `jq`, one `git`, and no per-field subprocess spawning.
 
-## Configuration
+</details>
+
+<details>
+<summary><b>⚙️ Configuration, responsive layout & lean style</b> — full reference, inherited from upstream coralline (click to expand)</summary>
 
 Everything lives in `~/.claude/coralline.conf` (plain bash, sourced by the script):
 
@@ -217,6 +224,8 @@ Prefer Powerlevel10k's *lean* look — no backgrounds, just colored text? Set
 > **Tip:** already a p10k user? Tell the AI installer to import your `~/.p10k.zsh` — it will
 > carry over your style, colors, and time format. See the
 > [Powerlevel10k import step in INSTALL.md](./INSTALL.md#step-25--powerlevel10k-import-optional).
+
+</details>
 
 ## Themes
 
