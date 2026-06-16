@@ -1,11 +1,66 @@
-# coralline
+# coralline-best-themes
 
 > 給 Claude Code 用、向 [Powerlevel10k](https://github.com/romkatv/powerlevel10k) 致敬的
 > statusline，特色是**由 AI 幫你安裝**——貼一句提示詞，回答幾個配色與版面的問題，就裝好了。
 
+![themes](https://img.shields.io/badge/themes-79-ff79c6)
+![picker](https://img.shields.io/badge/互動式選擇器-純%20bash-50fa7b)
+![deps](https://img.shields.io/badge/相依套件-零-8be9fd)
+![license](https://img.shields.io/badge/license-MIT-bd93f9)
+![fork of](https://img.shields.io/badge/fork%20自-Nanako0129%2Fcoralline-6272a4)
+
+> 🍴 **這是 [Nanako0129/coralline](https://github.com/Nanako0129/coralline) 的 fork**,由
+> **[@kylinfish](https://github.com/kylinfish)** 維護,額外加上了**72 套主題**與一個
+> **即時預覽的互動式主題選擇器**(見下方)。上游原本的引擎、安裝流程與主題全部保留——
+> 這個 fork 是在它之上「加料」,不是取代。
+
 [English README](./README.md)
 
 ![六種 coralline 主題總覽](./assets/hero.png)
+
+## ✨ 這個 fork 新增了什麼:72 套主題 + 互動式選擇器
+
+> **我的貢獻**([@kylinfish](https://github.com/kylinfish)):兩個新工具加一套主題包,
+> 全部都能從單一調色盤表重現。上游 coralline 內建 7 套手調主題、沒有選擇器——
+> 這個 fork 把總數帶到 **79 套主題**,並為 coralline 加上**首個即時預覽的互動式主題切換器**。
+
+這個 fork 把熱門 VS Code 擴充套件
+**[Best Themes Redefined](https://marketplace.visualstudio.com/items?itemName=lakshits11.best-themes-redefined)**
+的調色盤移植進 coralline——**72 套開箱即用的主題**(One Dark Pro、Dracula、Night Owl、
+Catppuccin、Gruvbox、Nord、Monokai、Laserwave、Horizon、Panda、Snazzy、Poimandres、Ayu、
+Andromeda、Synthwave、Material、GitHub、Xcode、Shades of Purple 等等)——再加上一個
+**即時互動選擇器**,讓你瀏覽全部主題並一鍵套用,完全不用手動編輯任何檔案:
+
+```bash
+bash tools/theme-picker.sh
+```
+
+```text
+  coralline theme picker  —  12/79 themes
+  ↑/↓ j/k 移動 · u/d 翻頁 · enter 套用 · q 離開
+
+  preview:
+  ╭ ~/proj  ⎇ main  ◆ Opus 4.8  ⬡ ▰▰▰▱▱ 62%  5h ▰▰▱▱▱ 41%  $1.23  ⊙ 02:45 pm ╮
+
+  ▸ one-dark-pro
+    night-owl
+    laserwave
+    shades-of-purple
+```
+
+- **即時預覽**——被選取的主題會用你自己的 `statusline.sh` 與目前的區段/版面設定,
+  渲染成一條*真正的* statusline。
+- **非破壞式套用**——`enter` 只會替換 `coralline.conf` 裡的主題那一行;其餘所有設定
+  (區段、版面、時鐘、量表)都原封不動保留。
+- **純 bash、零相依**——方向鍵 / `j` `k` 移動,`u` `d` 翻頁,`q` 離開。
+- **可重現**——每套主題都由 [`tools/gen-best-themes.py`](./tools/gen-best-themes.py)
+  從單一調色盤表產生,所以新增或微調一套主題只要改一處、重跑一次。
+
+> 擴充套件的 92 個項目收斂成 72 套不重複的調色盤——Italic / Bold / Bordered / No-Italic
+> 這些變體在 statusline 上顏色完全相同。少數沒有公開 hex 值的主題,是從其來源主題重建的,
+> 並在檔頭標註 `# approximated`。
+
+想看原本內建的主題請見 [主題](#主題) 章節,或直接跑選擇器。
 
 ## 安裝（有趣的方式）
 
@@ -13,7 +68,7 @@
 
 ```text
 Please install coralline for me:
-fetch https://raw.githubusercontent.com/Nanako0129/coralline/main/INSTALL.md
+fetch https://raw.githubusercontent.com/kylinfish/coralline-best-themes/main/INSTALL.md
 and follow the playbook in it.
 ```
 
@@ -56,10 +111,18 @@ macOS 內建的 bash 3.2 和任何 Linux bash 都能跑。
 ## 手動安裝
 
 ```bash
-git clone https://github.com/Nanako0129/coralline ~/.claude/coralline-src
-mkdir -p ~/.claude/coralline/themes
+git clone https://github.com/kylinfish/coralline-best-themes ~/.claude/coralline-src
+mkdir -p ~/.claude/coralline/themes/best-themes ~/.claude/coralline/tools
 cp ~/.claude/coralline-src/statusline.sh ~/.claude/coralline/
-cp ~/.claude/coralline-src/themes/claude-coral.conf ~/.claude/coralline/themes/
+cp ~/.claude/coralline-src/themes/*.conf ~/.claude/coralline/themes/
+cp ~/.claude/coralline-src/themes/best-themes/*.conf ~/.claude/coralline/themes/best-themes/
+cp ~/.claude/coralline-src/tools/theme-picker.sh ~/.claude/coralline/tools/
+```
+
+接著用選擇器瀏覽所有主題並套用一套：
+
+```bash
+bash ~/.claude/coralline/tools/theme-picker.sh
 ```
 
 接著在 `~/.claude/settings.json` 加入：
@@ -162,6 +225,10 @@ narrow window:  ~/dev/app  ⎇ main  ◆ Fable 5
 主題就只是一個指定 `VL_BG_*` / `VL_FG_*` 的 `.conf` 檔——複製一份、改顏色、
 在 `coralline.conf` 裡改 source 你的版本即可。歡迎發 PR 貢獻新主題。
 
+**此外還有 [`themes/best-themes/`](./themes/best-themes) 裡移植的 72 套主題**——用
+[互動式選擇器](#-這個-fork-新增了什麼72-套主題--互動式選擇器)即可瀏覽並套用全部:
+`bash tools/theme-picker.sh`。
+
 > **提示：** 預覽圖是由 [`tools/render-screenshots.py`](./tools/render-screenshots.py)
 > 直接執行真實腳本產生的——新增主題後把名稱加進該檔的 `THEMES` 清單再跑一次，
 > 就會得到一張風格一致的預覽圖。
@@ -178,6 +245,15 @@ coralline 的視覺語言——膠囊化的區段、powerline 轉場、git 的 `
 至於名稱：珊瑚藻（coralline algae）以一層層纖薄的色彩堆出礁岩——
 而 **coral·line** 正是這個專案的本體：一條 Claude 珊瑚色的線。
 
+## 致謝與貢獻
+
+| 層次 | 作者 |
+|---|---|
+| **這個 fork**——72 套主題包、`gen-best-themes.py` 產生器,以及互動式 `theme-picker.sh` | **[@kylinfish](https://github.com/kylinfish)** |
+| **coralline**——statusline 引擎、安裝流程與 7 套原始主題 | [@Nanako0129](https://github.com/Nanako0129) |
+| **Best Themes Redefined**——本專案移植的來源調色盤 | [lakshits11](https://marketplace.visualstudio.com/items?itemName=lakshits11.best-themes-redefined) |
+| **Powerlevel10k**——視覺語言 | [@romkatv](https://github.com/romkatv) |
+
 ## 授權
 
-[MIT](./LICENSE)
+[MIT](./LICENSE)——與上游 coralline 相同。
