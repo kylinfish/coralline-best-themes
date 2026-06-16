@@ -4,14 +4,27 @@
 > Code that **installs itself through your AI** — paste one prompt, answer a few questions
 > about colors and layout, done.
 
-> 🍴 **A fork of [Nanako0129/coralline](https://github.com/Nanako0129/coralline)** that adds the
-> headline feature below. All the original engine, install flow, and themes are intact.
+![themes](https://img.shields.io/badge/themes-79-ff79c6)
+![picker](https://img.shields.io/badge/interactive%20picker-pure%20bash-50fa7b)
+![deps](https://img.shields.io/badge/dependencies-zero-8be9fd)
+![license](https://img.shields.io/badge/license-MIT-bd93f9)
+![fork of](https://img.shields.io/badge/fork%20of-Nanako0129%2Fcoralline-6272a4)
+
+> 🍴 **A fork of [Nanako0129/coralline](https://github.com/Nanako0129/coralline)** by
+> **[@kylinfish](https://github.com/kylinfish)**, extending it with a **72-theme pack** and a
+> **live interactive theme picker** (see below). The original engine, install flow, and themes
+> are all intact — this fork adds on top, it doesn't replace.
 
 [繁體中文說明](./README.zh-TW.md)
 
 ![All six coralline themes rendered side by side](./assets/hero.png)
 
 ## ✨ What this fork adds: 72 themes + an interactive picker
+
+> **My contribution** ([@kylinfish](https://github.com/kylinfish)): two new tools and a theme
+> pack, all reproducible from a single palette table. Upstream coralline ships 7 hand-tuned
+> themes and no picker — this fork brings the total to **79 themes** and adds the **first
+> interactive, live-preview theme switcher** for coralline.
 
 This fork ports the palettes from the popular VS Code extension
 **[Best Themes Redefined](https://marketplace.visualstudio.com/items?itemName=lakshits11.best-themes-redefined)**
@@ -57,7 +70,7 @@ Paste this into Claude Code:
 
 ```text
 Please install coralline for me:
-fetch https://raw.githubusercontent.com/Nanako0129/coralline/main/INSTALL.md
+fetch https://raw.githubusercontent.com/kylinfish/coralline-best-themes/main/INSTALL.md
 and follow the playbook in it.
 ```
 
@@ -101,10 +114,18 @@ spam. Works on stock macOS bash 3.2 and any Linux bash.
 ## Manual install
 
 ```bash
-git clone https://github.com/Nanako0129/coralline ~/.claude/coralline-src
-mkdir -p ~/.claude/coralline/themes
+git clone https://github.com/kylinfish/coralline-best-themes ~/.claude/coralline-src
+mkdir -p ~/.claude/coralline/themes/best-themes ~/.claude/coralline/tools
 cp ~/.claude/coralline-src/statusline.sh ~/.claude/coralline/
-cp ~/.claude/coralline-src/themes/claude-coral.conf ~/.claude/coralline/themes/
+cp ~/.claude/coralline-src/themes/*.conf ~/.claude/coralline/themes/
+cp ~/.claude/coralline-src/themes/best-themes/*.conf ~/.claude/coralline/themes/best-themes/
+cp ~/.claude/coralline-src/tools/theme-picker.sh ~/.claude/coralline/tools/
+```
+
+Then browse every theme and apply one with the picker:
+
+```bash
+bash ~/.claude/coralline/tools/theme-picker.sh
 ```
 
 Then add to `~/.claude/settings.json`:
@@ -230,6 +251,15 @@ the pill shapes possible.
 As for the name: coralline algae build reefs one thin, colorful layer at a time —
 and **coral·line** is exactly what this is: a line, in Claude's coral.
 
+## Credits
+
+| Layer | By |
+|---|---|
+| **This fork** — 72-theme pack, `gen-best-themes.py` generator, and the interactive `theme-picker.sh` | **[@kylinfish](https://github.com/kylinfish)** |
+| **coralline** — the statusline engine, install flow, and 7 original themes | [@Nanako0129](https://github.com/Nanako0129) |
+| **Best Themes Redefined** — the source palettes ported here | [lakshits11](https://marketplace.visualstudio.com/items?itemName=lakshits11.best-themes-redefined) |
+| **Powerlevel10k** — the visual language | [@romkatv](https://github.com/romkatv) |
+
 ## License
 
-[MIT](./LICENSE)
+[MIT](./LICENSE) — same as upstream coralline.
